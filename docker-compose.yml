@@ -2,7 +2,9 @@ version: "3"
 
 services:
   postgres:
-    image: postgres:9.5
+    image: postgres:10
+    logging:
+      driver: json-file
     volumes:
       - /var/lib/postgresql/data
     environment:
@@ -10,12 +12,14 @@ services:
       - POSTGRES_PASSWORD=postgres
     restart: always
   cachet:
+    logging:
+      driver: json-file
     build:
       context: .
       args:
         - cachet_ver=2.4
     ports:
-      - 80:8000
+      - 49888:8000
     links:
       - postgres:postgres
     environment:
