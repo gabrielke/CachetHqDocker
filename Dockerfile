@@ -96,5 +96,8 @@ COPY entrypoint.sh /sbin/entrypoint.sh
 
 USER root
 RUN chmod g+rwx /var/run/nginx.pid && \
-    chmod -R g+rw /var/www /usr/share/nginx/cache /var/cache/nginx /var/lib/nginx/ /etc/php7/php-fpm.d storage
+    chmod -R g+rw /var/www /usr/share/nginx/cache /var/cache/nginx /var/lib/nginx/ /etc/php7/php-fpm.d storage && \
+	chmod +rx /sbin/entrypoint.sh && \
+	chmod +r /etc/supervisor/supervisord.conf /etc/nginx/nginx.conf /etc/php7/php-fpm.d/www.conf /etc/nginx/conf.d/default.conf /var/www/html/.env 
 USER 1001
+
